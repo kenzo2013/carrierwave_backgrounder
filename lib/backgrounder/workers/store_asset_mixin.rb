@@ -35,11 +35,11 @@ module CarrierWave
         asset, asset_tmp = record.send(:"#{column}"), record.send(:"#{column}_tmp")
         cache_directory  = File.expand_path(asset.cache_dir, asset.root)
         if Rails.env.production?
-          @cache_path      = open("https://wire-files.s3.amazonaws.com/#{asset_tmp}")
+          @cache_path      = open("https://wire-files.s3.amazonaws.com/#{asset}")
         elsif Rails.env.staging?
-          @cache_path      = open("https://wire-files-staging.s3.amazonaws.com/#{asset_tmp}")
+          @cache_path      = open("https://wire-files-staging.s3.amazonaws.com/#{asset}")
         else
-          @cache_path      = File.join(cache_directory, asset_tmp)
+          @cache_path      = File.join(cache_directory, asset)
         end
         @tmp_directory   = File.join(cache_directory, asset_tmp.split("/").first)
       end
